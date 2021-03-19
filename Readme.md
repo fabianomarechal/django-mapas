@@ -8,9 +8,9 @@
     - Criar polígonos e medir a área do polígono
     - Posibilidade de apresentar ou não os polígonos criados
 =======
-    - Controle para apresentar ou não as camadas.
-    - Criar polígonos e medir a área do polígono.
-    - Posibilidade de apresentar ou não os políginos criados.
+    - Controle para apresentar ou não as camadas
+    - Criar polígonos e medir a área do polígono
+    - Posibilidade de apresentar ou não os polígonos criados
 
 Instalação
 ---
