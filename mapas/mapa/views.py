@@ -50,7 +50,7 @@ def mapa_list(request):
     
     elif request.method == 'POST':
         p = request.data['properties']
-        attrs = [ p['geometry'] for p in  request.data['geom']['features'] ]
+        attrs = [ p['geometry'] for p in  request.data['features'] ]
         geometries = []
         
         for geo in attrs:
