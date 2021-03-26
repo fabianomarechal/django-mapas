@@ -12,6 +12,10 @@
     - Criar polígonos e medir a área do polígono
     - Posibilidade de apresentar ou não os polígonos criados
 
+Pré-Requisitos
+---
+1. docker & docker-compose
+
 Instalação
 ---
 Rode os comandos no terminal na seguinte ordem:

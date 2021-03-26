@@ -1,2 +1,5 @@
 django
+djangorestframework
+djangorestframework-gis
+django-cors-headers
 psycopg2
