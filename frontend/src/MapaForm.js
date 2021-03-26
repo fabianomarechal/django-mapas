@@ -26,10 +26,10 @@ export default class MapaForm extends Component {
                     <input className='form-control' name='name' type='text' ref={(el) => this.input = el} value={this.props.mapa.properties.name} onChange={this.props.onChange} />
 
                     <label>Latitude</label>
-                    <input className='form-control' name='lat' type='text' ref={(el) => this.input = el} value={this.props.mapa.properties.lat} onChange={this.props.onChange}  />
+                    <input className='form-control' name='lat' type='number' ref={(el) => this.input = el} value={this.props.mapa.properties.lat} onChange={this.props.onChange}  />
 
                     <label>Longitude</label>
-                    <input className='form-control' name='lon' type='text' ref={(el) => this.input = el} value={this.props.mapa.properties.lon} onChange={this.props.onChange}  />
+                    <input className='form-control' name='lon' type='number' ref={(el) => this.input = el} value={this.props.mapa.properties.lon} onChange={this.props.onChange}  />
 
                     <div className='mapa'>
                         <MapaRender {...this.props} />
@@ -42,7 +42,6 @@ export default class MapaForm extends Component {
     }
 
     handleSubmit(event) {
-        // const { match: { params } } = this.props;
         if (this.props.mapa.properties && (this.props.mapa.properties.pk)) {
             this.handleUpdate(this.props.mapa.properties.pk);
         }
@@ -50,6 +49,7 @@ export default class MapaForm extends Component {
             this.handleCreate();
         }
         event.preventDefault();
+        window.location.href = '/';
     }
 
     handleCreate() {

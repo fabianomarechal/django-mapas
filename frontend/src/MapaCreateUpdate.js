@@ -33,25 +33,22 @@ class MapaCreateUpdate extends Component {
 
     _onInputChange(e) {
         const target = e.target;
+        let mapa = this.state.mapa;
         if(target.name === 'name'){
-            let mapa = this.state.mapa;
             mapa.properties.name = target.value;
-            this.setState({mapa: mapa})
         } else if (target.name === 'lat') {
-            let mapa = this.state.mapa;
             mapa.properties.lat = target.value;
-            this.setState({ mapa: mapa })
         } else if (target.name === 'lon') {
-            let mapa = this.state.mapa;
             mapa.properties.lon = target.value;
-            this.setState({ mapa: mapa });
         }
+        this.setState({mapa: mapa})
         e.preventDefault();
     }
 
     _onMapaChange(e){
-        let mapa = { geom: e,
-            properties: this.state.mapa.properties};
+        let properties = this.state.mapa.properties;
+        let mapa = e;
+        mapa.properties = properties;
         this.setState({ mapa: mapa });
     }
 

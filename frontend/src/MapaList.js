@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {MapContainer, TileLayer, LayersControl, GeoJSON, FeatureGroup} from 'react-leaflet';
-import EditControl from  './EditControl';
+import EditControl from './EditControl';
 import MapaService from './MapaService';
-import {CRS} from 'leaflet';
 
 const mapaService = new MapaService();
 
@@ -27,17 +26,11 @@ class MapaList extends Component {
         console.log(this.state.mapas);
     }
 
-    handleDelete(e, pk) {
+    handleDelete(e, p) {
         var self = this;
-        mapaService.removeMapa({pk: pk}).then(()=>{
-            console.log(self.state.mapas);
-            // var newArr = self.state.mapas.filter(function(obj){
-            //     console.log('aas ', obj.properties.pk, ' === ', pk);
-            //     return obj.properties.pk !== pk;
-            // });
-            // self.setState({mapas: newArr});
-            self.componentDidMount();
-        });
+        if(window.confirm(`Tem certeza que deseja apagar o mapa ${p.pk} - ${p.name}?`)){
+            mapaService.removeMapa({pk: p.pk}).then(()=>self.componentDidMount());
+        }
     }
 
     nextPage(){
@@ -56,10 +49,9 @@ class MapaList extends Component {
                     <td>{c.properties.name}</td>
                     <td>{c.properties.lat}</td>
                     <td>{c.properties.lon}</td>
-                    
                     <td>
-                        <button onClick={(e) => this.handleDelete(e, c.properties.pk)}>Remover</button>
-                        <a href={'/mapas/' + c.properties.pk}>Atualizar</a>
+                        <a className='btn btn-success' href={'/mapas/' + c.properties.pk}>Atualizar</a>
+                        <button className='btn btn-danger' onClick={(e) => this.handleDelete(e, c.properties)}>Remover</button>
                     </td>
                 </tr>);
         } else {
@@ -75,7 +67,6 @@ class MapaList extends Component {
                             <th>Nome</th>
                             <th>Latitude</th>
                             <th>Longitude</th>
-                            <th>Geom</th>
                             <th>Ações</th>
                         </tr>
                     </thead>

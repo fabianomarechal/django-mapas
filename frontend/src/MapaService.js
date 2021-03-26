@@ -7,16 +7,17 @@ export default class MapaService {
     //Adicionar Mapa
     addMapa(mapa){
         const url = `${API_URL}/api/mapas/`;
-        return axios.post(url, JSON.stringify(mapa)).then(res => console.log('Resultado:', res.data));
+        return axios.post(url, JSON.stringify(mapa)).then(res => res.data);
     }
 
-    // Recuperar Mapas do Usuario
+    // Recuperar Lista de Mapas
     getMapas(){
         const url = `${API_URL}/api/mapas`;
         return axios.get(url).then(response => response.data);
 
     }
 
+    // Recuperar mapa por ID
     getMapa(pk){
         const url = `${API_URL}/api/mapas/${pk}`;
         return axios.get(url).then(res=>res.data);
@@ -24,8 +25,6 @@ export default class MapaService {
 
     // Atualizar Mapa
     updateMapa(mapa){
-        console.log('Update Mapa');
-        // console.log(mapa);
         const url = `${API_URL}/api/mapas/${mapa.properties.pk}`;
         return axios.put(url, JSON.stringify(mapa)).then(res=>res.data);
     }

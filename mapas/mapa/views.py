@@ -17,6 +17,11 @@ from .serializers import *
 def index(req):
     return render(req, 'mapa/index.html')
 
+def json_to_geom(a):
+            for x in range(len(a)):
+                a[x] = tuple(map(tuple, (y for y in a[x])))
+            return a[0]
+
 @api_view(['GET', 'POST'])
 @parser_classes([JSONParser])
 def mapa_list(request):
@@ -45,14 +50,8 @@ def mapa_list(request):
     
     elif request.method == 'POST':
         p = request.data['properties']
-        
-        # serializer = MapaSerializer(data={'name': p['name'], 'lat': p['lat'], 'lon': p['lon'], 'geom': request.data['geom']})
         attrs = [ p['geometry'] for p in  request.data['geom']['features'] ]
         geometries = []
-        def json_to_geom(a):
-            for x in range(len(a)):
-                a[x] = tuple(map(tuple, (y for y in a[x])))
-            return a[0]
         
         for geo in attrs:
             if geo['coordinates']:
@@ -79,36 +78,28 @@ def mapas_detail(request, pk):
         serializer = MapaSerializer(mapa,context={'request': request})
         return Response(serializer.data)
 
-    elif request.method == 'PUT':
-        #
+    elif request.method == 'PUT':        
         p = request.data['properties']
-        
-        # serializer = MapaSerializer(data={'name': p['name'], 'lat': p['lat'], 'lon': p['lon'], 'geom': request.data['geom']})
-        attrs = request.data['geom']['features']
         geometries = []
-        def json_to_geom(a):
-            for x in range(len(a)):
-                a[x] = tuple(map(tuple, (y for y in a[x])))
-            return a[0]
         
-        for geo in attrs:
-            if geo['geometry']['coordinates']:
-                geo['geometry']['coordinates'] = json_to_geom(geo['geometry']['coordinates'])
-                geometries.append(Polygon(geo['geometry']['coordinates'], srid=4326))
-        print(geometries)
+        if 'geometry' in request.data:
+            for geo in request.data['geometry']['geometries']:
+                if geo['coordinates']:
+                    geo['coordinates'] = json_to_geom(geo['coordinates'])
+                    geometries.append(Polygon(geo['coordinates'], srid=4326))
+        else:
+            attrs = [ p['geometry'] for p in request.data['features'] ]
+            for geo in attrs:
+                if geo['coordinates']:
+                    geo['coordinates'] = json_to_geom(geo['coordinates'])
+                    geometries.append(Polygon(geo['coordinates'], srid=4326))
         
-        mapa.geom = GeometryCollection(tuple(geometries));
+        mapa.name, mapa.lat, mapa.lon, mapa.geom = (p['name'], p['lat'], p['lon'], GeometryCollection(tuple(geometries)))
+        # mapa.geom = GeometryCollection(tuple(geometries));
         mapa.save();
         serializer = MapaSerializer(mapa, context={'request', request});
 
         return Response(serializer.data)
-
-        #
-        serializer = MapaSerializer(mapa, data=request.data,context={'request': request})
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         mapa.delete()

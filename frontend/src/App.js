@@ -14,7 +14,7 @@ const BaseLayout = () => (
       </button>
       <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
         <div className='navbar-nav'>
-        <a href="/" className='nav-item nav-link'>Mapas</a>
+        <a href="/" className='nav-item nav-link'>Listar Mapas</a>
         <a href="/mapas" className='nav-item nav-link'>Adicionar Mapa</a>
         </div>
       </div>

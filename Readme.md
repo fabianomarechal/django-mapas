@@ -24,6 +24,7 @@ Rode os comandos no terminal na seguinte ordem:
 3. Após o término do processamento aparecerá a linha LOG:  database system is ready to accept connections, aperte `ctrl+c`
 4. Para carregar o banco com as migrações iniciais: `docker-compose run django python manage.py migrate`
 5. Para criar usuário superadmin no django: `docker-compose run django python manage.py createsuperuser`
+6. Para instalar as dependências do frontend: `docker-compose run frontend npm install`
 
 Rodando o sistema
 ---
