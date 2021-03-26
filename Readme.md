@@ -29,4 +29,4 @@ Rode os comandos no terminal na seguinte ordem:
 Rodando o sistema
 ---
 Inicialize o banco e aplicativo rodando o comando: `docker-compose up`
->>>>>>> 07d0e4136854a6161ac68be58c5205e08d6ac439
+
