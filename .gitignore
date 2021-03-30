@@ -3,3 +3,5 @@ __pycache__
 dados
 .vscode
 node_modules
+geckodriver.log
+

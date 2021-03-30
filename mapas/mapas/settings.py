@@ -127,6 +127,9 @@ CORS_ALLOWED_ORIGINS = (
     'http://localhost:3000',
 )
 
+REST_FRAMEWORK = {
+     'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
