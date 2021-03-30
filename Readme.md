@@ -26,6 +26,10 @@ Rode os comandos no terminal na seguinte ordem:
 5. Para criar usuário superadmin no django: `docker-compose run django python manage.py createsuperuser`
 6. Para instalar as dependências do frontend: `docker-compose run frontend npm install`
 
+Rodando os testes
+---
+>>> docker-compose run django python manage.py test
+
 Rodando o sistema
 ---
 Inicialize o banco e aplicativo rodando o comando: `docker-compose up`
