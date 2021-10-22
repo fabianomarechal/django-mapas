@@ -3,7 +3,6 @@
 ## Recursos: 
     - Cadastrar mapas
     - Camadas shapefiles
-<<<<<<< HEAD
     - Controle para apresentar ou não as camadas
     - Criar polígonos e medir a área do polígono
     - Posibilidade de apresentar ou não os polígonos criados
@@ -28,7 +27,7 @@ Rode os comandos no terminal na seguinte ordem:
 
 Rodando os testes
 ---
->>> docker-compose run django python manage.py test
+>>> `docker-compose run django python manage.py test`
 
 Rodando o sistema
 ---
